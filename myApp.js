@@ -28,6 +28,7 @@ app.get("/:word/echo", function (req, res) {
   });
 });
 
+/*
 //--- Retrieving route parameter via Query property ---
 app.get("/name", (req, res) => {
   var { first: firstName, last: lastName } = req.query
@@ -35,7 +36,16 @@ app.get("/name", (req, res) => {
     name: firstName + " " + lastName
   })
 });
+*/
 
+
+//--- Retrieving body parameters using POST request ---
+app.post("/name", (req, res) => {
+  var { first: firstName, last: lastName } = req.body
+  res.json({
+    name: firstName + " " + lastName
+  })
+});
 
 //--- Middleware to retrieve current time and send a JSON as response ---
 app.get("/now", function (req, res, next) {
