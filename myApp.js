@@ -1,11 +1,11 @@
 let express = require('express');
 
-console.log("Hello World");
+//console.log("Hello World");
 
 let app = express();
 
-app.get("/", (req, res, next) => {
-  console.log("i'm a Middleware! Someone accessed the route");
+app.use(function(req, res, next) {
+  console.log(req.method + " " + req.path + " - " + req.ip);
   next();
 });
 
