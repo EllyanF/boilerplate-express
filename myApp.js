@@ -1,4 +1,5 @@
 let express = require('express');
+let bodyParser = require('body-parser');
 
 /*
 --- Loggin Hello World into console log ---
@@ -9,10 +10,14 @@ let app = express();
 
 
 //--- Middleware to log request's information each time someone access a route ---
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
 });
+
+
+//--- Using bodyParser to Parse POST requests ---
+app.use(bodyParser.urlencoded({ extended: false }))
 
 
 //--- Retrieving route parameter and return a JSON containing it ---
@@ -27,7 +32,7 @@ app.get("/:word/echo", function (req, res) {
 app.get("/name", (req, res) => {
   var { first: firstName, last: lastName } = req.query
   res.json({
-    name:  firstName + " " + lastName
+    name: firstName + " " + lastName
   })
 });
 
@@ -48,7 +53,7 @@ app.get("/now", function (req, res, next) {
 app.get("/json", (req, res) => {
   if (process.env.MESSAGE_STYLE === "uppercase")
     res.json({
-        "message": "Hello json".toUpperCase()
+      "message": "Hello json".toUpperCase()
     });
   else {
     res.json({
@@ -63,9 +68,10 @@ app.use("/public", express.static(__dirname + "/public"))
 
 
 //--- Send and HTML file as response ---
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 })
+
 
 
 
