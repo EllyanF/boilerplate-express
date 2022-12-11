@@ -4,7 +4,12 @@ console.log("Hello World");
 
 let app = express();
 
+app.get("/", (req, res, next) => {
+  console.log("i'm a Middleware! Someone accessed the route");
+  next();
+});
 
+/*
 app.get("/json", (req, res) => {
   if (process.env.MESSAGE_STYLE === "uppercase")
     res.json({
@@ -16,6 +21,7 @@ app.get("/json", (req, res) => {
     });
   }
 })
+*/
 
 //app.use("/public", express.static(__dirname + "/public"))
 
