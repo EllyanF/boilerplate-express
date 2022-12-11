@@ -1,12 +1,25 @@
+const { json } = require('body-parser');
 let express = require('express');
 
 //console.log("Hello World");
 
 let app = express();
 
+/*
 app.use(function(req, res, next) {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
+});
+*/
+
+app.get("/now", function (req, res, next) {
+  req.time = new Date().toString();
+  next();
+},
+function (req, res) {
+  res.json({
+    "time": req.time
+  });
 });
 
 /*
@@ -66,4 +79,4 @@ app.get("/", function(req, res) {
 
 
 
- module.exports = app;
+module.exports = app;
