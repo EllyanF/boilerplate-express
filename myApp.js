@@ -15,6 +15,15 @@ app.use(function(req, res, next) {
 });
 */
 
+// --- Retrieving route parameter and return a JSON containing it ---
+app.get("/:word/echo", function (req, res) {
+  var param1 = req.params.word
+  res.json({
+    "echo": param1
+  });
+});
+
+/*
 //--- Middleware to retrieve current time and send a JSON as response ---
 app.get("/now", function (req, res, next) {
   req.time = new Date().toString();
@@ -25,6 +34,7 @@ app.get("/now", function (req, res, next) {
       "time": req.time
     });
   });
+*/
 
 /*
 --- Uses .env file to set message to upper case ---
@@ -42,7 +52,7 @@ app.get("/json", (req, res) => {
 */
 
 /*
---- Use an Stylesheet file to use with the HTML page ---
+--- Use Stylesheet file(s) to use with the HTML page ---
 app.use("/public", express.static(__dirname + "/public"))
 */
 
